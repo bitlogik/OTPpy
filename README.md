@@ -33,7 +33,7 @@ Example for check :
 
 From pip/pypi repository :
 
-    python3 pip install otppy
+    python3 -m pip install otppy
 
 The old fashion way :  
 Copy the otppy folder in your working directory.  
