@@ -11,35 +11,44 @@ Easy to use OTP 2FA check and generator, counter-based or time-based
 
 Compatible with Google Authenticator (default settings)
 
-Example for generation :
-
-    from otppy import OTP
-    this_otp = OTP.fromb32("BASE32-SECRET-HERE")
-    # TOTP return : [TOTP, Remaining Time in seconds]
-    totp = this_otp.TOTP()
-    print("TOTP Code :", totp[0])
-    print(totp[1], "sec left")
-
-Example for check :
-
-    # Initialize
-    from otppy import OTP
-    this_otp = OTP.fromb32("BASE32-SECRET-HERE")
-    # Check validity, return a boolean
-    totp_valid = this_otp.TOTP(string_code_received)
-
 
 ## Using library
+
+### Get the library
 
 From pip/pypi repository :
 
     python3 -m pip install otppy
 
-The old fashion way :  
-Copy the otppy folder in your working directory.  
-"from otppy import OTP" in your python program.
+Or the old fashion way :  
+Copy the otppy folder in your working directory.
 
-### Interface methods of OTPpy
+Use  
+`from otppy import OTP` in your Python program.
+
+
+### Examples
+
+
+Example for code generation :
+
+    from otppy import OTP
+    this_otp = OTP.fromb32("BASE32SECRETHERE")
+    # TOTP return : [TOTPcode, Remaining Time in seconds]
+    totp = this_otp.TOTP()
+    print("TOTP Code :", totp[0])
+    print(totp[1], "sec left")
+
+Example for code check :
+
+    # Initialize
+    from otppy import OTP
+    this_otp = OTP.fromb32("BASE32SECRETHERE")
+    # Check validity, return a boolean
+    totp_valid = this_otp.check_TOTP(string_code_received)
+
+
+### Interface methods of OTPpy OTP
 
 `otppy.OTP( secret, hashalg="sha1", digits=6, time_window=30 )`  
 Create an OTP object from a raw secret.  
@@ -51,7 +60,7 @@ secret_base32 is the shared secret encoded in base32, optional padding.
 hashalg is the hash algorithm to use : "sha1", "sha256" or "sha512".  
 digits is the integer for number of digits.  
 time_window is the time width of a time block in seconds (integer).  
-Note that secret_base32 is enough to use a standard OTP setting (sha1, 6 digits, 30 seconds blocks).
+Note that the secret_base32 argument is enough to use a standard OTP setting (sha1, 6 digits and 30 seconds blocks).
 
 `.HOTP( counter )`  
 Compute a HOTP code from the integer counter value.  
@@ -80,8 +89,8 @@ Test vectors from standards included in tests directory for pytest :
     python3 -m pytest tests
 
 
-Licence :
-----------
+Licence
+-------
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
