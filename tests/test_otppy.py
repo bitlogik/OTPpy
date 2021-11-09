@@ -116,6 +116,7 @@ def test_check():
     assert otpsha1.check_HOTP(epoch, "50471") is False
     assert otpsha1.check_HOTP(epoch, "050471") is False
     assert otpsha1.check_HOTP(epoch, "") is False
+    assert otpsha1.check_HOTP(epoch, "j") is False
     assert otpsha1.check_HOTP(epoch, "1514050471") is False
     assert otpsha1.check_HOTP(epoch, "14050471 ") is False
     assert otpsha1.check_HOTP(epoch, " 14050471") is False

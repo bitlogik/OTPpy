@@ -22,10 +22,10 @@ from time import time
 from base64 import b32decode
 from struct import pack, unpack
 
-from .hmac_lib import hash_code
+from .hmac_lib import hash_code, compare_strings
 
 
-VERSION = "0.1.0"
+VERSION = "0.1.2"
 
 
 class OTP:
@@ -58,12 +58,12 @@ class OTP:
     def check_HOTP(self, counter_value, hotp_string):
         """Check the validity of a HOTP code string"""
         computed_hotp = self.HOTP(counter_value)
-        return hotp_string == computed_hotp
+        return compare_strings(hotp_string, computed_hotp)
 
     # pylint: disable-next=invalid-name
     def check_TOTP(self, totp_string):
         """Check the validity of a TOTP code string"""
-        return totp_string == self.TOTP()
+        return compare_strings(totp_string, self.TOTP()[0])
 
     def epoch_otp(self, epoch_time):
         """Compute OTP from a given epoch integer."""

@@ -35,3 +35,12 @@ def hash_code(key, message, digest_alg):
     if is_python_37():
         return hmac.digest(key, message, digest_alg)
     return hmac.HMAC(key, message, digest_alg).digest()
+
+
+def compare_strings(string_a, string_b):
+    """String comparison to prevent timing analysis."""
+    if not isinstance(string_a, str):
+        return False
+    if not isinstance(string_b, str):
+        return False
+    return hmac.compare_digest(string_a, string_b)
