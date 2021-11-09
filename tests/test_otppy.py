@@ -20,7 +20,7 @@ def test_otp_sanity():
     totp_computed = otp0.TOTP()[0]
     assert otp0.HOTP(current_epoch // 30) == totp_computed
     assert 30 - (current_epoch % 30) == otp0.remain_time(current_epoch)
-    assert otp0.check_TOTP(otp0.TOTP())
+    assert otp0.check_TOTP(otp0.TOTP()[0])
 
 
 def test_hotp():
